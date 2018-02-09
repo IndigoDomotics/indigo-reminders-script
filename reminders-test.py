@@ -22,6 +22,13 @@ reminder_dict = {
     "destination_account": "iCloud",
     "priority_string": "high"
 }
+#
+# Call the makeNewReminder handler in the Reminders script. The syntax to call an AppleScript handler
+# follows this pattern:
+#
+#     return_data = scriptobject.call("handlername", ["parameter1", ["parameter2"...]])
+#
+# We want to call the makeNewReminder(reminder_record) method of the script, so our call looks like this:
 reply = reminders.call("makeNewReminder", reminder_dict)
 if not reply["success"]:
     reason = reply["reason"]
