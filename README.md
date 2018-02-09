@@ -15,7 +15,7 @@ which keeps it from correctly loading AppleScript files.
 
 ### Usage
 
-Download the latest release from the releases link above. Once you've got
+Download the latest release from the **release** tab above. Once you've got
 it downloaded to your Mac, move the `Reminders.scpt` AppleScript file to
 some safe, permanent location. We recommend that you put them here:
 
