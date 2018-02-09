@@ -5,14 +5,33 @@ import applescript
 from datetime import datetime, timedelta
 import sys
 
-# Change this to point to the actual location of your script
-path_to_script = "/Reminders.scpt"
+# To make this script as universal as possible, we're goin to get a little tricky with
+# imports. First, we'll attempt to import the indigo module, which should only work if
+# this script is running from within Indigo.
+try:
+    import indigo
+except:
+    indigo = None
+
+# Assuming you've followed the recommendations on where to put the script and you're running
+# it from Indigo, this section that specifies the script path should work nicely with no changes
+# and is future proof since it should work from any version of Indigo after Indigo 6.
+if indigo:
+    path_to_script = indigo.server.getInstallFolderPath() + "/Scripts/Reminders.scpt"
+else:
+    # If you aren't running the script from Indigo then you should use this line along with a
+    # a full path specifier. Take out the if/else from above even if you are running from
+    # Indigo but are using a custom path.
+    path_to_script = "/Reminders.scpt"
+
+# Now that we have the path sorted, load the script using the py-applescript module
 reminders = applescript.AppleScript(path=path_to_script)
 
+# For these examples, we'll set the due date to be 24 hours from the time this script is run
 due_date = datetime.today() + timedelta(days=1)
 
 #
-# Create the reminder
+# Create the reminder dictionary
 #
 reminder_dict = {
     "title": "Test Reminder",
